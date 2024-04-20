@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This project consists of two main components: a Qt-based server (`QtServer`) and an MFC-based client (`MfcClient`). The `QtServer` reads real-time data from an accelerometer connected via USB and transmits it to multiple clients. The `MfcClient` displays the data fetched from the server. This setup allows for a distributed system where data acquisition and display are handled separately, enhancing flexibility and scalability.
+This project consists of two main components: a Qt-based server (`AccViewQtSrv`) and an MFC-based client (`AccViewDrawMFC`). The `QtServer` reads real-time data from an accelerometer connected via USB and transmits it to multiple clients. The `MfcClient` displays the data fetched from the server. This setup allows for a distributed system where data acquisition and display are handled separately, enhancing flexibility and scalability.
 
 ## System Components
 
@@ -50,3 +50,6 @@ This project consists of two main components: a Qt-based server (`QtServer`) and
 
 - **Dependencies:** Requires Qt for the server and MFC for the client, alongside standard C++ libraries.
 - **Compilation and Configuration:** Each component must be compiled separately with their respective frameworks and connected over a network configured for TCP/IP communication.
+
+The MFC client is capable of directly accessing data from the accelerometer and visually presenting it in a graphical format.
+The accelerometer can also be utilized as a stylus, allowing its movements to dictate the drawing on the display.
