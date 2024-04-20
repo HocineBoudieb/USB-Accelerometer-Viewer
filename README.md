@@ -25,6 +25,7 @@ This project consists of two main components: a Qt-based server (`AccViewQtSrv`)
 - **Distributed Architecture:** Separates data acquisition from data display, allowing for a modular and scalable system design.
 - **Real and Emulated Sensor Data:** Handles both real and simulated data, enabling testing without physical hardware.
 - **Graphical Display:** The client displays acceleration data graphically in a window, with curves colored red, green, and blue for different axes.
+  ![alt text](screenshot.png)
 - **Dynamic Sensor Management:** Sensors can be dynamically added or removed from the server, and changes are reflected in real-time on the client.
 
 ## Implementation Details
