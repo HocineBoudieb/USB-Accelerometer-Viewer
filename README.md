@@ -1,4 +1,4 @@
-+++
+
 # Project README: Accelerometer Display Application
 
 ## Project Overview
@@ -44,4 +44,3 @@ This project involves the development of a software application capable of readi
 
 This README provides a general overview and setup instructions for the Accelerometer Display Application project. For detailed implementation guidance, refer to the project's codebase and documentation files.
 
-+++
