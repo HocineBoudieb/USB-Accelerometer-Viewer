@@ -1,46 +1,52 @@
-
-# Project README: Accelerometer Display Application
+# Accelerometer Display Application
 
 ## Project Overview
 
-This project involves the development of a software application capable of reading and displaying real-time accelerometer data on a PC screen. The data is fetched from an accelerometer connected via USB. The application provides an object-oriented interface for low-level communication with one or multiple accelerometers and includes both real and emulated sensor data handling.
+This project consists of two main components: a Qt-based server (`QtServer`) and an MFC-based client (`MfcClient`). The `QtServer` reads real-time data from an accelerometer connected via USB and transmits it to multiple clients. The `MfcClient` displays the data fetched from the server. This setup allows for a distributed system where data acquisition and display are handled separately, enhancing flexibility and scalability.
+
+## System Components
+
+### QtServer
+
+- **Data Handling:** Continuously reads accelerometer data and sends updates to connected clients.
+- **Network Communication:** Uses a custom protocol to transmit packets containing acceleration data up to five times per second.
+- **Client Management:** Capable of handling up to 50 simultaneous client connections.
+- **Error Handling:** Manages sensor disconnections and transmits error states to clients.
+
+### MfcClient
+
+- **Data Reception:** Connects to `QtServer` via network and receives acceleration data.
+- **User Interface:** Built using Microsoft Foundation Classes (MFC), provides a graphical display of acceleration vectors.
+- **Interactivity:** Includes controls for starting/stopping data streams, scaling graphical output, and other interactive features.
+- **Error Visualization:** Displays errors and alerts from the server regarding sensor connectivity and data integrity.
 
 ## Features
 
-- **Sensor Management:** The `AccManager` class manages access to and monitoring of multiple sensors, allowing dynamic addition or removal of sensors from the USB interface.
-- **Individual Sensor Handling:** The `AccSensor` class encapsulates access to individual sensors.
-- **Data Visualization:** The application can display three curves (representing x, y, and z acceleration components) in red, green, and blue. Users can start and stop data acquisition and adjust the vertical scale from the interface.
-- **Error Handling:** The application handles real-world scenarios like disconnection of sensors, providing robust error management.
-- **Data Acquisition:** Features a timer-triggered acquisition every 100 ms, ensuring continuous data flow.
-- **User Interface:** Includes menu items and buttons for controlling acquisition, scaling, and data display.
-- **Graphical Display:** A specialized window displays the acceleration trace with adjustable pen thickness and color based on the acceleration components.
-- **Distributed Version:** The project also includes a distributed application version, which supports real-time data reading and display across a network, accommodating multiple clients.
+- **Distributed Architecture:** Separates data acquisition from data display, allowing for a modular and scalable system design.
+- **Real and Emulated Sensor Data:** Handles both real and simulated data, enabling testing without physical hardware.
+- **Graphical Display:** The client displays acceleration data graphically in a window, with curves colored red, green, and blue for different axes.
+- **Dynamic Sensor Management:** Sensors can be dynamically added or removed from the server, and changes are reflected in real-time on the client.
 
 ## Implementation Details
 
-- **MFC-SDI Application:** Utilizes Microsoft Foundation Classes (MFC) in a Single Document Interface (SDI) setup.
-- **Interactive Controls:** Users can interact through the UI to manage sensor configurations, start/stop data acquisition, and adjust display settings.
-- **File Operations:** Supports saving and loading of accelerometer data to and from a file, using a common dialog box with a custom file extension.
-- **Additional Functionality:** Custom features include selective display of curves and modular selection of display elements.
+### QtServer
+
+- **Technology:** Developed using the Qt framework for robust network handling and backend processing.
+- **Setup:** Runs continuously on a host machine, reading from the accelerometer and managing network communications.
+
+### MfcClient
+
+- **Technology:** Utilizes Microsoft Foundation Classes (MFC) for the client interface.
+- **Interaction:** Users can control the application through a dedicated UI, managing connection settings and display options.
 
 ## Usage
 
-1. **Starting the Application:** Launch the application, which automatically detects and initializes connected sensors.
-2. **Managing Sensors:** Add or remove sensors via the application interface.
-3. **Viewing Data:** Select the `View/Draw` menu option to open the data display window. Use zoom buttons to scale the visual output.
-4. **Saving and Loading Data:** Data can be saved to and loaded from files, with support for handling only the most recent data points to optimize performance.
+1. **Server Initialization:** Start the `QtServer` which automatically begins reading from the connected accelerometer and awaits client connections.
+2. **Client Connection:** Launch the `MfcClient`, which connects to the server via the network to receive data.
+3. **Data Interaction:** Use the client's UI to start/stop data streams, adjust visualizations, and handle sensor configurations.
+4. **Handling Disconnections:** Both server and client include error handling mechanisms to deal with potential hardware or network issues.
 
 ## Development Setup
 
-- **Dependencies:** Requires MFC for UI components and standard C++ libraries for backend processing.
-- **Compilation:** Include `AccSensor.h` and `AccManager` class into your project. Define necessary macros for compilation.
-- **Configuration:** Adjust settings for sensor detection and display properties as needed.
-
-## Future Enhancements
-
-- **Improved Sensor Handling:** Enhance the capability to handle more complex sensor configurations.
-- **User Interface Enhancements:** Upgrade the UI for better user interaction and visualization capabilities.
-- **Network Capabilities:** Expand the distributed version to handle more clients and provide more robust network error handling.
-
-This README provides a general overview and setup instructions for the Accelerometer Display Application project. For detailed implementation guidance, refer to the project's codebase and documentation files.
-
+- **Dependencies:** Requires Qt for the server and MFC for the client, alongside standard C++ libraries.
+- **Compilation and Configuration:** Each component must be compiled separately with their respective frameworks and connected over a network configured for TCP/IP communication.
